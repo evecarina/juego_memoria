@@ -1,0 +1,13 @@
+ .imgFondo{
+ 	z-index: 1;
+    position: absolute;
+
+}
+td{
+	width: 150px;
+	height: 150px;
+}
+/*.img_pnda{
+	display: none;
+	position: relative;
+}*/
