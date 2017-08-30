@@ -41,58 +41,47 @@ function eliminar(imgFondo){
 }
 
 // creando un array
-var arrayMostrarPanda=[];
-console.log(arrayMostrarPanda);
+// var arrayMostrarPanda=[];
+// console.log(arrayMostrarPanda);
 
-var tdPandas = document.getElementsByTagName('td');
-//var imgPandas = document.getElementsByTagName('img_pnda');
-
-
-for (var i = 0; i < tdPandas.length; i++) {
-    tdPandas[i].addEventListener('click',memorizar);
-}
+// var tdPandas = document.getElementsByTagName('td');
+// //var imgPandas = document.getElementsByTagName('img_pnda');
 
 
-var src1;
-var src2;
-
-var cont;
-
+// for (var i = 0; i < tdPandas.length; i++) {
+//     tdPandas[i].addEventListener('click',memorizar);
+// }
 
 
+// var src1;
+// var src2;
 
- function memorizar(event){
-
- 	var tdPandas = document.getElementsByTagName('td');
-
-    if(cont<2){
-    	if(cont==1){
-   src1=event.target.nextSibling.src;
-
-    	}
-   else if(cont==2){
-   	src2=event.target.nextSibling.src;
-     if (src1==src2){
-   	console.log("son iguales");
-      	 }
-      	 else {
-      	 	console.log("diferente");
-
-      	 }
-	}
- }
-
-
-    	// if (arrayMostrarPanda[0]!=arrayMostrarPanda[1]){
-    	// 	var imgFondo=document.getElementsByClassName('imgFondo');
-     //  setTimeout(function(){tdPandas[1].appendChild(imgFondo)},100);
+// var cont;
 
 
 
-cont++;
 
- }
+//  function memorizar(event){
 
-	//document.write(a);
+//  	var tdPandas = document.getElementsByTagName('td');
 
-memorizar();
+//     if(cont<2){
+//     	if(cont==1){
+//    src1=event.target.nextSibling.src;
+
+//     	}
+//    else if(cont==2){
+//    	src2=event.target.nextSibling.src;
+//      if (src1==src2){
+//    	console.log("son iguales");
+//       	 }
+//       	 else {
+//       	 	console.log("diferente");
+
+//       	 }
+// 	}
+//  }
+
+// 	//document.write(a);
+
+// memorizar();
