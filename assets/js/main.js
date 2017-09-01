@@ -1,87 +1,74 @@
-var array_pandas=["assets/img/1.jpg","assets/img/2.jpg","assets/img/3.jpg",
-"assets/img/4.jpg","assets/img/5.jpg","assets/img/6.jpg","assets/img/1.jpg",
-"assets/img/2.jpg","assets/img/3.jpg","assets/img/4.jpg",
-"assets/img/5.jpg","assets/img/6.jpg"]
+/* Crear las tarjetas con jQuery*/
+var trjAbierta = "";
+var imgAbierta = ""; //contador para saber si las imagenes abiertas
+var contadorAciertos = 0;
+var trjEncontrada = 0;
 
-//var img_fondo="assets/img/fondo.jpg";
-function tablero_imagenes(){
-	var table=document.getElementById('table');
-var x=0;
-for (var i=0;i<3;i++){
-	var tr=document.createElement("tr");
+var contImagenes = [
+		"assets/img/imgPuzzle/img1.png",
+		"assets/img/imgPuzzle/img2.png",
+		"assets/img/imgPuzzle/img3.png",
+		"assets/img/imgPuzzle/img4.png",
+		"assets/img/imgPuzzle/img5.png",
+		"assets/img/imgPuzzle/img6.png",		
+		];
 
-	for (var j=0;j<4;j++){
-		//poniendo imagen fondo negro
-		var td=document.createElement("td");
-		var imgFondo=document.createElement("img");
-		imgFondo.setAttribute('class',"imgFondo");
-		imgFondo.setAttribute('src',"assets/img/fondo.jpg");
-		td.appendChild(imgFondo);
-		tr.appendChild(td);
 
-        imgFondo.setAttribute('onclick','eliminar(this)');
 
-		var img_pnda=document.createElement("img");
-		img_pnda.setAttribute("class","img_pnda");
-		img_pnda.setAttribute('src',array_pandas[x]);
-		td.appendChild(img_pnda);
-		tr.appendChild(td);
-       x++;
+/*Creamos la puzzle con div's ,utilizando el array,y le damos un id distinto a cada uno*/
+$(function() {
+
+for (var j = 0; j< 2 ; j++) {
+	/*Utilizamos 'each' para recorrer los elementos de la seleccion,le damos 2 parametros,indice y el elemento*/
+	$.each(contImagenes, function(i, val) {
+		$('#espacioPuzzle').append("<div id=tarjetas" + j + i + "><img src=" + val + " />");
+	});
+}
+	$("#espacioPuzzle" + " div").click(playCard);
+});
+
+
+/* Creamos la funcion que le da la vuelta a las tarjetas*/
+
+function playCard(){
+	//Buscamos el atributo de Dom 'id' con 'attr'.
+	var id = $(this).attr("id");
+	// Realizamos una comparacion con un metodo de filtrado,para saber si la imagen tiene la propieda 'hidden', que nos permite esconder una imagen pero que siga ocupando el mismo espacio.
+	if ($("#" + id + " img").is(":hidden")) {
+		$("#espacioPuzzle" + " div").off("click", playCard);
+		/*Una función para llamar una vez que la animación se completa, llamada una vez por elemento emparejado.*/
+		$("#" + id + " img").slideDown('slow');
+		/*Implementamos las animaciones,cuando las imagenes son diferentes tomamos la ruta de la primera imagen y el id de la segunda,demanera que en la comparacion ambos seran diferentes*/
+		if (imgAbierta == "") {
+			trjAbierta = id;
+			/*obtenemos la ruta de acceso de la primera imagen a la que le hacemos click*/
+			imgAbierta = $("#" + id + " img").attr("src");
+			console.log(imgAbierta);
+			setTimeout(function() {
+				$("#espacioPuzzle" + " div").on("click", playCard)
+			}, 100);
+		} else {
+			/*obtenemos la ruta de acceso de la primera segunda imagen a la que le hacemos click*/
+			trjActual = $("#" + id + " img").attr("src");
+			console.log(trjActual);
+			/*Comparamos las rutas almacenadas en las variables,aqui tomamos las rutas y las alamacenamos en las variable para compararlas*/
+			if (imgAbierta != trjActual) {
+				setTimeout(function() {
+					$("#" + id + " img").slideUp('slow');
+					$("#" + trjAbierta + " img").slideUp('slow');
+					trjAbierta = "";
+					imgAbierta = "";
+				}, 100);
+			} else {
+				$("#" + id + " img").parent().css("visibility", "hidden");
+				$("#" + trjAbierta + " img").parent().css("visibility", "hidden");
+				trjEncontrada++;
+				trjAbierta = "";
+				imgAbierta = "";
+			}
+			setTimeout(function() {
+				$("#espacioPuzzle" + " div").on("click", playCard)
+			}, 100);
+		}
 	}
-	table.appendChild(tr);
-	table.border="1";
 }
-
-}
-tablero_imagenes();
-
-function eliminar(imgFondo){
-    // imgFondo.style.visibility='hidden';
-    imgFondo.style.display = "none";
-}
-
-// creando un array
-// var arrayMostrarPanda=[];
-// console.log(arrayMostrarPanda);
-
-// var tdPandas = document.getElementsByTagName('td');
-// //var imgPandas = document.getElementsByTagName('img_pnda');
-
-
-// for (var i = 0; i < tdPandas.length; i++) {
-//     tdPandas[i].addEventListener('click',memorizar);
-// }
-
-
-// var src1;
-// var src2;
-
-// var cont;
-
-
-
-
-//  function memorizar(event){
-
-//  	var tdPandas = document.getElementsByTagName('td');
-
-//     if(cont<2){
-//     	if(cont==1){
-//    src1=event.target.nextSibling.src;
-
-//     	}
-//    else if(cont==2){
-//    	src2=event.target.nextSibling.src;
-//      if (src1==src2){
-//    	console.log("son iguales");
-//       	 }
-//       	 else {
-//       	 	console.log("diferente");
-
-//       	 }
-// 	}
-//  }
-
-// 	//document.write(a);
-
-// memorizar();
